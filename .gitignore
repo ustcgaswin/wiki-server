@@ -1,0 +1,39 @@
+# ── Python ────────────────────────────────────────────────
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[co]
+*.pyd
+
+# Distributions
+build/
+dist/
+wheels/
+*.egg-info/
+
+# SQLite databases
+*.sqlite
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment variables
+*.env
+
+# ── Logs ──────────────────────────────────────────────────
+logs/
+*.log
+
+# ── Node.js ───────────────────────────────────────────────
+node_modules/
+
+# ── Project-specific artifacts ───────────────────────────
+mlartifacts/
+project_analysis/
+project_storage/
+project_wiki/
+
+# ── IDE / Editor ─────────────────────────────────────────
+.vscode/

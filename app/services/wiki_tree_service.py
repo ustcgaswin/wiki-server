@@ -55,6 +55,7 @@ code_extensions = [
     ".erl",     # Erlang
     ".ex", ".exs", # Elixir
     ".asm", ".s", # Assembly
+    ".config"
 ]
 
 doc_extensions = [
@@ -65,6 +66,7 @@ doc_extensions = [
     # data / queries
     ".sql",       # SQL queries
     ".csv", ".tsv",
+    ".config"
 ]
 
 allowed_exts = set(code_extensions + doc_extensions)

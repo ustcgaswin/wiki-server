@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "jsdom": "^26.1.0",
     "jsdom-global": "^3.0.2",
     "mermaid": "^11.9.0"
   }

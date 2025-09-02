@@ -1,6 +1,6 @@
 import uuid
 import dspy
-# import mlflow
+import mlflow
 from fastapi import FastAPI, Request, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
@@ -20,10 +20,10 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
 
-    # mlflow.set_tracking_uri("http://127.0.0.1:5000")
-    # mlflow.set_experiment("DSPy")
-    # mlflow.config.enable_async_logging(True)
-    # mlflow.dspy.autolog(log_compiles=True, log_evals=True, log_traces_from_compile=True)
+    mlflow.set_tracking_uri("http://127.0.0.1:5000")
+    mlflow.set_experiment("DSPy")
+    mlflow.config.enable_async_logging(True)
+    mlflow.dspy.autolog(log_compiles=True, log_evals=True, log_traces_from_compile=True)
 
 
     logger.info("Creating database and tables…")

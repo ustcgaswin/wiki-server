@@ -3,15 +3,11 @@ from uuid import UUID
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from app.agents.wiki_content_generation_agent import create_wiki_content_generation_agent
 
-
 import logging
 import tiktoken
 logger = logging.getLogger(__name__)
 
-
-
-MAX_AGENT_TOKENS = 100_000 
-
+MAX_AGENT_TOKENS = 100_000
 MAX_WORKER_AGENTS = 8  # Limit for parallel agent workers
 
 def _write_dummy_markdown(file_path: Path, title: str):
@@ -67,8 +63,11 @@ def generate_wiki_for_project(project_id: UUID, tree: dict):
                 if token_count > MAX_AGENT_TOKENS:
                     logger.warning(f"File '{source_file}' exceeds token limit: {token_count} tokens (limit: {MAX_AGENT_TOKENS})")
                     file_content = tokenizer.decode(tokens[:MAX_AGENT_TOKENS])
-            agent = create_wiki_content_generation_agent()
-            markdown = agent(page_title=node, file_content=file_content, wiki_tree=tree).content
+            # Pass project_id so the agent has access to the git_log tool for this project
+            agent = create_wiki_content_generation_agent(project_id)
+            result = agent(page_title=node, file_content=file_content, wiki_tree=tree)
+            # result may be an object depending on dspy.ReAct; handle .content if present
+            markdown = getattr(result, "content", result)
             md_file = wiki_dir / rel_path / f"{node}.md"
             md_file.parent.mkdir(parents=True, exist_ok=True)
             md_file.write_text(markdown, encoding="utf-8")
